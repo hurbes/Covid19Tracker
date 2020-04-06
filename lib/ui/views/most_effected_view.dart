@@ -6,12 +6,18 @@ import 'package:provider_architecture/provider_architecture.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 
-class MostEffectView extends StatelessWidget {
+class MostEffectView extends StatefulWidget {
   const MostEffectView({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  _MostEffectViewState createState() => _MostEffectViewState();
+}
+
  RefreshController _refreshController = RefreshController(initialRefresh: false);
+class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAliveClientMixin<MostEffectView> {
+  @override
+  Widget build(BuildContext context) {
+       super.build(context);
     return ViewModelProvider<MostEffectedViewModel>.withConsumer(
         viewModel: MostEffectedViewModel(),
         onModelReady: (model) => model.getWorldCases(),
@@ -28,7 +34,7 @@ class MostEffectView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
                 child: Column(
                   children: <Widget>[
-                    summaryWidgetItem(
+                    SummaryWidgetItem(
                         cases: model.worldcases?.cases,
                         active: model.worldcases?.active,
                         death: model.worldcases?.deaths,
@@ -68,5 +74,13 @@ class MostEffectView extends StatelessWidget {
           );
         });
   }
+   
+ @override
+  void dispose() {
+   _refreshController.dispose();
+    super.dispose();
+  }
+  @override
+  bool get wantKeepAlive => true;
 }
 

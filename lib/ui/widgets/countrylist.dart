@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class CountryList extends StatelessWidget {
+class CountryList extends StatefulWidget {
   final int limit;
   const CountryList({
     this.limit,
@@ -12,9 +12,14 @@ class CountryList extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  _CountryListState createState() => _CountryListState();
+}
     RefreshController _refreshController =
         RefreshController(initialRefresh: false);
+class _CountryListState extends State<CountryList> {
+  @override
+  Widget build(BuildContext context) {
+
     return ViewModelProvider<CountryViewModel>.withConsumer(
         viewModel: CountryViewModel(),
         onModelReady: (model) => model.getCountryCases(),
@@ -28,12 +33,12 @@ class CountryList extends StatelessWidget {
                           () => _refreshController.refreshCompleted()),
                       child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: limit != null ? limit : model.country.length,
+                        itemCount: widget.limit != null ? widget.limit : model.country.length,
                         itemBuilder: (context, i) {
                           return Padding(
                             padding:
                                 const EdgeInsets.only(top: 0.0, bottom: 15),
-                            child: summaryWidgetItem(
+                            child: SummaryWidgetItem(
                                 active: model.country[i].active,
                                 cases: model.country[i].cases,
                                 critical: model.country[i].critical,
@@ -67,5 +72,11 @@ class CountryList extends StatelessWidget {
                       )),
                 );
         });
+  }
+   
+ @override
+  void dispose() {
+   _refreshController.dispose();
+    super.dispose();
   }
 }

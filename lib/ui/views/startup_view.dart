@@ -105,7 +105,7 @@ class _StartUpPageState extends State<StartUpPage>
                 children: <Widget>[
                   HomeView(),
                   MostEffectView(),
-                  countryView(),
+                  CountryView(),
                   FAQView()
                 ],
               ));

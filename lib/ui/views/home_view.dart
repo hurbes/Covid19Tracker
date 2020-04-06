@@ -6,15 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({
     Key key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  _HomeViewState createState() => _HomeViewState();
+}
+
+ScrollController _scrollController = ScrollController();
+
     RefreshController _refreshController =
         RefreshController(initialRefresh: false);
+class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin<HomeView>{
+  @override
+  Widget build(BuildContext context)  {
+           super.build(context);
     return ViewModelProvider<HomeViewModel>.withConsumer(
         viewModel: HomeViewModel(),
         onModelReady: (model) => model.getIndiaDetailsData(),
@@ -30,6 +38,7 @@ class HomeView extends StatelessWidget {
                     .getIndiaDetailsData()
                     .whenComplete(() => _refreshController.refreshCompleted()),
                 child: SingleChildScrollView(
+                  controller: _scrollController,
                   child: Column(
                     children: <Widget>[
                       SummaryWidget(
@@ -77,4 +86,14 @@ class HomeView extends StatelessWidget {
           );
         });
   }
+  
+ @override
+  void dispose() {
+   _refreshController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
