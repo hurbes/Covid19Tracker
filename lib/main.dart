@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'core/services/dialog_service.dart';
 import 'locator.dart';
 import 'managers/dialog_manager.dart';
-import 'ui/views/home_view.dart';
+import 'ui/views/startup_view.dart';
 
 
 void main() {
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeView(),
+      home: StartUpPage(),
     );
   }
 }

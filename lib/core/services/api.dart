@@ -1,23 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
-import 'package:covid19tracker/core/models/state.dart';
-import 'package:covid19tracker/core/models/summary.dart';
+import 'package:covid19tracker/core/models/Country.dart';
+import 'package:covid19tracker/core/models/IndiaDetails.dart';
+import 'package:covid19tracker/core/models/WorldCases.dart';
 import 'package:http/http.dart' as http;
 
 
 class Api {
-  static const String _apiEndpoint = 'https://api.rootnet.in/covid19-in/stats/latest';
+  static const String _indiaStats = 'https://api.rootnet.in/covid19-in/stats/latest';
+  static const String _worldStats = 'https://corona.lmao.ninja';
 
   Future<dynamic> getStateData() async {
     try {
       var response = await http.get(
-          '$_apiEndpoint',);
+          '$_indiaStats',);
       if (response.statusCode == 200) {
-        var states = (json.decode(response.body)["data"]["regional"] as List)
-            .map((state) => State.fromJson(state))
-            .toList();
-        return states;
+         var details = IndiaDetails.fromJson(json.decode(response.body));
+        return details;
       } else {
          return "Can't fetch state data";
       }
@@ -26,15 +26,33 @@ class Api {
     }
   }
 
-   Future<dynamic> getsummaryData() async {
+    Future<dynamic> getWolrdStats() async {
     try {
       var response = await http.get(
-          '$_apiEndpoint',);
+          '$_worldStats/all',);
       if (response.statusCode == 200) {
-        var summary = StateSummary.fromJson(json.decode(response.body)["data"]["summary"]);
-        return summary;
+         var worldcases = WorldCases.fromJson(json.decode(response.body));
+        return worldcases;
       } else {
-        return "Can't fetch summary data";
+         return "Can't fetch state data";
+      }
+    } on SocketException {
+      return "Failed to connect DataBase";
+    }
+  }  
+
+  
+    Future<dynamic> getCountryStats() async {
+    try {
+      var response = await http.get(
+          '$_worldStats/countries',);
+      if (response.statusCode == 200) {
+         var countryStats = (json.decode(response.body) as List)
+            .map((country) => Country.fromJson(country))
+            .toList();
+        return countryStats;
+      } else {
+         return "Can't fetch state data";
       }
     } on SocketException {
       return "Failed to connect DataBase";

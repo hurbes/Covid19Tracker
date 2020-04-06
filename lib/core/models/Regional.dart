@@ -1,18 +1,19 @@
-class State {
+
+class Regional {
   String loc;
   int confirmedCasesIndian;
   int discharged;
   int deaths;
   int confirmedCasesForeign;
 
-  State(
+  Regional(
       {this.loc,
       this.confirmedCasesIndian,
       this.discharged,
       this.deaths,
       this.confirmedCasesForeign});
 
-  State.fromJson(Map<String, dynamic> json) {
+  Regional.fromJson(Map<String, dynamic> json) {
     loc = json['loc'];
     confirmedCasesIndian = json['confirmedCasesIndian'];
     discharged = json['discharged'];

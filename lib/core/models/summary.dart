@@ -1,4 +1,5 @@
-class StateSummary {
+
+class SummaryState {
   int total;
   int confirmedCasesIndian;
   int confirmedCasesForeign;
@@ -6,7 +7,7 @@ class StateSummary {
   int deaths;
   int confirmedButLocationUnidentified;
 
-  StateSummary(
+  SummaryState(
       {this.total,
       this.confirmedCasesIndian,
       this.confirmedCasesForeign,
@@ -14,7 +15,7 @@ class StateSummary {
       this.deaths,
       this.confirmedButLocationUnidentified});
 
-  StateSummary.fromJson(Map<String, dynamic> json) {
+  SummaryState.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     confirmedCasesIndian = json['confirmedCasesIndian'];
     confirmedCasesForeign = json['confirmedCasesForeign'];

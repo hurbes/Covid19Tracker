@@ -65,7 +65,7 @@ class MainTable extends StatelessWidget {
         ),
       ),
     ], rows: [
-      ...model.state
+      ...model.indiaDetails.data.regional
           .map((e) => DataRow(cells: [
                 DataCell(
                   Text(
@@ -150,7 +150,7 @@ class MainTable extends StatelessWidget {
         ),
         DataCell(
           Text(
-            model.summary
+            model.indiaDetails.data.summary
                 ?.confirmedCasesIndian
                 .toString(),
             style: TextStyle(
@@ -163,7 +163,7 @@ class MainTable extends StatelessWidget {
         ),
         DataCell(
           Text(
-            model.summary
+         model.indiaDetails.data.summary
                 ?.confirmedCasesForeign
                 .toString(),
             style: TextStyle(
@@ -176,7 +176,7 @@ class MainTable extends StatelessWidget {
         ),
         DataCell(
           Text(
-            model.summary?.discharged
+            model.indiaDetails.data.summary?.discharged
                 .toString(),
             style: TextStyle(
                 fontFamily: "OpenSans",
@@ -188,7 +188,7 @@ class MainTable extends StatelessWidget {
         ),
         DataCell(
           Text(
-            model.summary?.deaths
+           model.indiaDetails.data.summary?.deaths
                 .toString(),
             style: TextStyle(
                 fontFamily: "OpenSans",

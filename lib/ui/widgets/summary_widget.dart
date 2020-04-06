@@ -59,7 +59,7 @@ class SummaryWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 0.0, right: 20),
                       child: Text(
-                        model.summary?.total.toString(),
+                        model.indiaDetails?.data?.summary?.total.toString(),
                         style: TextStyle(
                           color: Colors.black.withOpacity(0.7),
                           fontFamily: "OpenSans",
@@ -91,7 +91,7 @@ class SummaryWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 0.0, right: 20),
                       child: Text(
-                        model.summary
+                        model.indiaDetails?.data?.summary
                             ?.confirmedButLocationUnidentified
                             .toString(),
                         style: TextStyle(
@@ -124,7 +124,7 @@ class SummaryWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 0.0, right: 20),
                       child: Text(
-                        model.summary?.discharged
+                       model.indiaDetails?.data?.summary?.discharged
                             .toString(),
                         style: TextStyle(
                             fontFamily: "OpenSans",
@@ -156,7 +156,7 @@ class SummaryWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 0.0, right: 20),
                       child: Text(
-                        model.summary?.deaths.toString(),
+                       model.indiaDetails?.data?.summary?.deaths.toString(),
                         style: TextStyle(
                             fontFamily: "OpenSans",
                             fontWeight: FontWeight.w300,
