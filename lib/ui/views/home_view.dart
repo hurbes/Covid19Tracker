@@ -1,4 +1,3 @@
-
 import 'package:covid19tracker/core/viewmodels/home_view_model.dart';
 import 'package:covid19tracker/ui/shared/ui_helpers.dart';
 import 'package:covid19tracker/ui/widgets/main_table.dart';
@@ -33,27 +32,6 @@ class HomeView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      // verticalSpaceLarge,
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: <Widget>[
-                      //     Align(
-                      //         alignment: Alignment.topLeft,
-                      //         child: Text(
-                      //           "Covid-19 Tracker",
-                      //           style: TextStyle(
-                      //               fontFamily: "OpenSans",
-                      //               fontWeight: FontWeight.w700,
-                      //               fontSize: 25),
-                      //         )),
-                      //     IconButton(
-                      //         icon: Icon(Icons.info_outline),
-                      //         onPressed: () {
-                      //           model.about();
-                      //         })
-                      //   ],
-                      // ),
-                      // verticalSpaceMedium,
                       SummaryWidget(
                         model: model,
                       ),
