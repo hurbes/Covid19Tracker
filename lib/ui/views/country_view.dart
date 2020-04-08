@@ -13,7 +13,6 @@ class CountryView extends StatefulWidget {
   _CountryViewState createState() => _CountryViewState();
 }
 
-TextEditingController _controller = TextEditingController();
 
 class _CountryViewState extends State<CountryView>
     with AutomaticKeepAliveClientMixin<CountryView> {
@@ -58,7 +57,6 @@ class _CountryViewState extends State<CountryView>
                                         fontFamily: "OpenSans",
                                         fontWeight: FontWeight.w300,
                                         fontSize: 20)),
-                                controller: _controller,
                                 onChanged: (val) =>
                                     model.filterSearchResults(val.trim()),
                               ),
