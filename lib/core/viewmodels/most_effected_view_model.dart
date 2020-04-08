@@ -29,5 +29,4 @@ class MostEffectedViewModel extends BaseModel {
     }
     notifyListeners();
   }
-
 }

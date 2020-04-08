@@ -22,7 +22,11 @@ class _StartUpPageState extends State<StartUpPage>
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _pageController = PageController(
+      initialPage: 0,
+      keepPage: true
+    );
+    
   }
 
   @override
@@ -98,15 +102,17 @@ class _StartUpPageState extends State<StartUpPage>
               ),
               body: PageView(
                 physics: AlwaysScrollableScrollPhysics(),
+                pageSnapping: true,
                 controller: _pageController,
                 onPageChanged: (index) {
                   setState(() => _currentIndex = index);
                 },
+                allowImplicitScrolling: true,
                 children: <Widget>[
                   HomeView(),
                   MostEffectView(),
                   CountryView(),
-                  FAQView()
+                 FAQView()
                 ],
               ));
         });

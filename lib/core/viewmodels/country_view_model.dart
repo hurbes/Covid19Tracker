@@ -6,17 +6,17 @@ import 'package:covid19tracker/core/viewmodels/base_model.dart';
 import '../../locator.dart';
 
 class CountryViewModel extends BaseModel {
-
   Api _api = locator<Api>();
   DialogService _dialogService = locator<DialogService>();
-
 
   List<Country> _country = [];
   List<Country> get country => _country;
 
-    Future getCountryCases() async{
+  List<Country> _countryB = [];
+
+  Future getCountryCases() async {
     setBusy(true);
-     var result = await _api.getCountryStats();
+    var result = await _api.getCountryStats();
     if (result is List<Country>) {
       _country = result;
       setBusy(false);
@@ -27,6 +27,21 @@ class CountryViewModel extends BaseModel {
         description: result,
       );
     }
+    _countryB = _country;
     notifyListeners();
+  }
+
+  void filterSearchResults(String query) {
+    if (query.isNotEmpty) {
+      _country = _countryB
+          .where((element) => element.country.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      notifyListeners();
+      return;
+    } else {
+      _country.clear();
+      _country.addAll(_countryB);
+      notifyListeners();
+    }
   }
 }

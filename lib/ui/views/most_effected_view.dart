@@ -1,9 +1,10 @@
 import 'package:covid19tracker/core/viewmodels/most_effected_view_model.dart';
-import 'package:covid19tracker/ui/widgets/countrylist.dart';
 import 'package:covid19tracker/ui/widgets/summary_widget_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'country_view.dart';
 
 
 class MostEffectView extends StatefulWidget {
@@ -41,32 +42,33 @@ class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAlive
                         name: 'World Wide',
                         recovered: model.worldcases?.recovered,
                         critical: model.worldcases?.critical),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Divider(
-                        height: 50,
-                        thickness: 1,
-                        color: Colors.black87,
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    //   child: Divider(
+                    //     height: 30,
+                    //     thickness: 1,
+                    //     color: Colors.black87,
+                    //   ),
+                    // ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 0.0, bottom: 20),
+                        padding: const EdgeInsets.only(top : 15),
                         child: Text(
                           "Most Affected Countries",
                           style: TextStyle(
                               color: Colors.black.withOpacity(0.6),
                               fontFamily: "OpenSans",
-                              fontWeight: FontWeight.w700,
-                              fontSize: 25),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 23),
                         ),
                       ),
                     ),
-                    Expanded(
-                        child: CountryList(
-                      limit: 5,
-                    ))
+                     Expanded(
+                         child: CountryView(
+                       limit: 5,
+                       call: true,
+                     ))
                   ],
                 ),
               ),

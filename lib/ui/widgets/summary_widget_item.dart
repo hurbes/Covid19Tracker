@@ -9,12 +9,14 @@ class SummaryWidgetItem extends StatelessWidget {
   final int critical;
   final String name;
   final String flag;
+  final String critcalreplacement;
   const SummaryWidgetItem(
       {@required this.cases,
-      @required this.active,
+       this.active,
       @required this.recovered,
       @required this.death,
-      @required this.critical,
+       this.critical,
+       this.critcalreplacement,
       @required this.name,
       this.flag,
       Key key})
@@ -31,6 +33,7 @@ class SummaryWidgetItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
+            //name
             Row(
               children: <Widget>[
                 Expanded(
@@ -63,6 +66,7 @@ class SummaryWidgetItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                //case
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +97,8 @@ class SummaryWidgetItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
+                //Active
+            active != null ? Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,7 +125,8 @@ class SummaryWidgetItem extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
+                ) : SizedBox(),
+                //Recovered
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +155,8 @@ class SummaryWidgetItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
+                //Critical
+          critical != null? Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,11 +165,11 @@ class SummaryWidgetItem extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 0.0, right: 20, bottom: 10),
                       child: Text(
-                        "Critical",
+                       critcalreplacement == null? "Critical" : critcalreplacement,
                         style: TextStyle(
                             fontFamily: "OpenSans",
                             fontWeight: FontWeight.w300,
-                            color: Colors.redAccent.withOpacity(0.7)),
+                            color: critical == null? Colors.redAccent.withOpacity(0.7) :Colors.deepPurple.withOpacity(0.7) ),
                       ),
                     ),
                     Padding(
@@ -172,11 +179,12 @@ class SummaryWidgetItem extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: "OpenSans",
                             fontWeight: FontWeight.w300,
-                            color: Colors.redAccent.withOpacity(0.7)),
+                            color: critical == null? Colors.redAccent.withOpacity(0.7) :Colors.deepPurple.withOpacity(0.7) ),
                       ),
                     ),
                   ],
-                ),
+                ) : SizedBox(),
+                //death
                 Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
