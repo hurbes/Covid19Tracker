@@ -1,4 +1,5 @@
 import 'package:covid19tracker/core/viewmodels/home_view_model.dart';
+import 'package:covid19tracker/ui/widgets/loading.dart';
 import 'package:covid19tracker/ui/widgets/summary_widget_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
@@ -26,7 +27,7 @@ class _HomeViewState extends State<HomeView>
         builder: (context, model, child) {
           var summary = model.indiaDetails?.data?.summary;
           return Container(
-            color: Colors.grey.withOpacity(0.1),
+            color: Theme.of(context).backgroundColor,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
               child: SmartRefresher(
@@ -45,14 +46,30 @@ class _HomeViewState extends State<HomeView>
                           critcalreplacement: "Foreign",
                           critical: summary?.confirmedCasesForeign,
                           name: 'India Summary'),
-                       Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Divider(
-                        height: 50,
-                        thickness: 1,
-                        color: Colors.black.withOpacity(0.4),
-                      ),
-                    ),
+                     Padding(
+                       padding: const EdgeInsets.only(top : 25.0 , bottom: 15),
+                       child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: TextField(
+                                  cursorColor: Colors.grey.withOpacity(0.4),
+                                  style: Theme.of(context).textTheme.headline4,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Search",
+                                      hintStyle: Theme.of(context).textTheme.headline4,),
+                                  onChanged: (val) =>
+                                      model.filterSearchResults(val.trim()),
+                                ),
+                              ),
+                            ),
+                          ),
+                     ),
                       !model.busy
                           ? model.indiaDetails != null
                               ? Expanded(
@@ -79,22 +96,11 @@ class _HomeViewState extends State<HomeView>
                                     child: Center(
                                         child: Text(
                                       "NO Data Found",
-                                      style: TextStyle(fontSize: 30),
+                                      style: TextStyle(fontSize: 30 , color: Colors.black87 , fontFamily: "OpenSans"),
                                     )),
                                   ),
                                 )
-                          : Center(
-                              child: SizedBox(
-                                  height: 200,
-                                  width: 200,
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                        strokeWidth: 4,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Colors.black)),
-                                  )),
-                            ),
+                          : Loading(),
                     ],
                   )
               ),

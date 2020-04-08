@@ -30,7 +30,7 @@ class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAlive
                     .getWorldCases()
                     .whenComplete(() => _refreshController.refreshCompleted()),
                       child: Container(
-              color: Colors.grey.withOpacity(0.1),
+              color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
                 child: Column(
@@ -56,11 +56,7 @@ class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAlive
                         padding: const EdgeInsets.only(top : 15),
                         child: Text(
                           "Most Affected Countries",
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.6),
-                              fontFamily: "OpenSans",
-                              fontWeight: FontWeight.w600,
-                              fontSize: 23),
+                          style: Theme.of(context).textTheme.headline4,
                         ),
                       ),
                     ),

@@ -8,7 +8,7 @@ class FAQView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey.withOpacity(0.1),
+      color: Theme.of(context).backgroundColor,
       child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
           child: ListView.builder(

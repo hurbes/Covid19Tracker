@@ -1,4 +1,5 @@
 import 'package:covid19tracker/core/models/IndiaDetails.dart';
+import 'package:covid19tracker/core/models/Regional.dart';
 import 'package:covid19tracker/core/services/api.dart';
 import 'package:covid19tracker/core/services/dialog_service.dart';
 import 'package:covid19tracker/core/viewmodels/base_model.dart';
@@ -10,6 +11,7 @@ class HomeViewModel extends BaseModel {
 
   IndiaDetails _indiaDetails;
   IndiaDetails get indiaDetails => _indiaDetails;
+  List<Regional> _indiaDetailsBackup = [];
 
   Future getIndiaDetailsData() async {
     setBusy(true);
@@ -24,6 +26,22 @@ class HomeViewModel extends BaseModel {
         description: result,
       );
     }
+    _indiaDetailsBackup = _indiaDetails.data.regional;
     notifyListeners();
+  }
+
+  
+  void filterSearchResults(String query) {
+    if (query.isNotEmpty) {
+      _indiaDetails.data.regional = _indiaDetailsBackup
+          .where((element) => element.loc.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      notifyListeners();
+      return;
+    } else {
+      _indiaDetails.data.regional.clear();     
+      _indiaDetails.data.regional.addAll(_indiaDetailsBackup);
+      notifyListeners();
+    }
   }
 }

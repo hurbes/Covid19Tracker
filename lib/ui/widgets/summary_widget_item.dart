@@ -27,7 +27,8 @@ class SummaryWidgetItem extends StatelessWidget {
     return Container(
       height: 150,
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Theme.of(context).primaryColor, 
+          borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -44,11 +45,7 @@ class SummaryWidgetItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       softWrap: false,
-                      style: TextStyle(
-                          color: Colors.black.withOpacity(0.6),
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.w300,
-                          fontSize: 20),
+                      style: Theme.of(context).textTheme.headline4
                     ),
                   ),
                 ),
@@ -77,22 +74,14 @@ class SummaryWidgetItem extends StatelessWidget {
                           left: 0.0, right: 20, bottom: 10),
                       child: Text(
                         "Case",
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.7),
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.w300,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 0.0, right: 20),
                       child: Text(
                         '${cases ?? ''}',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.7),
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.w300,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1
                       ),
                     ),
                   ],
@@ -179,7 +168,7 @@ class SummaryWidgetItem extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: "OpenSans",
                             fontWeight: FontWeight.w300,
-                            color: critical == null? Colors.redAccent.withOpacity(0.7) :Colors.deepPurple.withOpacity(0.7) ),
+                            color: critical == null? Colors.redAccent.withOpacity(0.9) :Colors.deepPurple.withOpacity(0.9) ),
                       ),
                     ),
                   ],
@@ -198,7 +187,7 @@ class SummaryWidgetItem extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: "OpenSans",
                             fontWeight: FontWeight.w300,
-                            color: Colors.red.withOpacity(0.9)),
+                            color: Colors.red.withOpacity(0.7)),
                       ),
                     ),
                     Padding(
@@ -208,7 +197,7 @@ class SummaryWidgetItem extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: "OpenSans",
                             fontWeight: FontWeight.w300,
-                            color: Colors.red.withOpacity(0.9)),
+                            color: Colors.red.withOpacity(0.7)),
                       ),
                     ),
                   ],

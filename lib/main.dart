@@ -1,20 +1,25 @@
+import 'package:covid19tracker/core/services/localStorageService.dart';
+import 'package:covid19tracker/ui/shared/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'core/services/dialog_service.dart';
 import 'locator.dart';
 import 'managers/dialog_manager.dart';
+import 'ui/shared/scrollConfig.dart';
 import 'ui/views/startup_view.dart';
 
 
-void main() {
+Future<void> main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    setupLocator();
-    runApp(MyApp());
+    await setupLocator();
+    runApp(Phoenix(child: MyApp()));
   } catch(error) {
     print('Locator setup has failed');
   }
 }
 class MyApp extends StatelessWidget {
+ final LocalStorageService _localStorageService = locator<LocalStorageService>();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -28,10 +33,9 @@ class MyApp extends StatelessWidget {
             builder: (context) => DialogManager(child: child)),
       );
       },
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-      ),
-      home: StartUpPage(),
+      theme: _localStorageService.darkmode ? darkTheme : lightTheme,
+      home: ScrollConfiguration(behavior: CustomConfig(),
+      child: StartUpPage()),
     );
   }
 }

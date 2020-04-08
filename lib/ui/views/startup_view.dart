@@ -7,114 +7,88 @@ import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'home_view.dart';
 
-class StartUpPage extends StatefulWidget {
-  const StartUpPage({Key key}) : super(key: key);
-
-  @override
-  _StartUpPageState createState() => _StartUpPageState();
-}
-
-class _StartUpPageState extends State<StartUpPage>
-    with SingleTickerProviderStateMixin {
-  int _currentIndex = 0;
-  PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(
-      initialPage: 0,
-      keepPage: true
-    );
-    
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
+class StartUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<BaseModel>.withConsumer(
         viewModel: BaseModel(),
         builder: (context, model, child) {
           return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(70.0),
-                child: AppBar(
-                  backgroundColor: Colors.grey.withOpacity(0.1),
-                  elevation: 0,
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 8.0 , top: 30.0),
-                    child: Text(
-                      "Covid-19 Tracker",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 25),
-                    ),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(70.0),
+              child: AppBar(
+                backgroundColor: Theme.of(context).backgroundColor,
+                elevation: 0,
+                title: Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 30.0),
+                  child: Text(
+                    "Covid-19 Tracker",
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                  actions: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0 , top: 25),
-                      child: IconButton(
-                          icon: Icon(
-                            Icons.info_outline,
-                            color: Colors.black87,
-                          ),
-                          onPressed: () {
-                            model.about();
-                          }),
-                    )
-                  ],
                 ),
-              ),
-              bottomNavigationBar: BottomNavyBar(
-                selectedIndex: _currentIndex,
-                onItemSelected: (index) {
-                  setState(() => _currentIndex = index);
-                  _pageController.jumpToPage(index);
-                },
-                showElevation: false,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                items: <BottomNavyBarItem>[
-                  BottomNavyBarItem(
-                    icon: Icon(Icons.apps),
-                    title: Text('Home'),
-                    activeColor: Colors.grey,
+                actions: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0, top: 25),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.lightbulb_outline,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          model.setDarkmode(context: context);
+                        }),
                   ),
-                  BottomNavyBarItem(
-                      icon: Icon(Icons.map),
-                      title: Text('Stats'),
-                      activeColor: Colors.grey),
-                  BottomNavyBarItem(
-                      icon: Icon(Icons.dashboard),
-                      title: Text('World Wide'),
-                      activeColor: Colors.grey),
-                  BottomNavyBarItem(
-                      icon: Icon(Icons.info_outline),
-                      title: Text('Misc.'),
-                      activeColor: Colors.grey),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0, top: 25),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.info_outline,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          model.about();
+                        }),
+                  ),
                 ],
               ),
-              body: PageView(
-                physics: AlwaysScrollableScrollPhysics(),
-                pageSnapping: true,
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() => _currentIndex = index);
-                },
-                allowImplicitScrolling: true,
-                children: <Widget>[
-                  HomeView(),
-                  MostEffectView(),
-                  CountryView(),
-                 FAQView()
-                ],
-              ));
+            ),
+            bottomNavigationBar: BottomNavyBar(
+              backgroundColor: Theme.of(context).primaryColor,
+              selectedIndex: model.cIndex,
+              onItemSelected: (index) => model.setCIndex(index: index),
+              showElevation: false,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              items: <BottomNavyBarItem>[
+                BottomNavyBarItem(
+                  icon: Icon(Icons.apps),
+                  title: Text('Home'),
+                  activeColor: Colors.grey,
+                ),
+                BottomNavyBarItem(
+                    icon: Icon(Icons.map),
+                    title: Text('Stats'),
+                    activeColor: Colors.grey),
+                BottomNavyBarItem(
+                    icon: Icon(Icons.dashboard),
+                    title: Text('World Wide'),
+                    activeColor: Colors.grey),
+                BottomNavyBarItem(
+                    icon: Icon(Icons.info_outline),
+                    title: Text('Misc.'),
+                    activeColor: Colors.grey),
+              ],
+            ),
+            body: IndexedStack(
+              index: model.cIndex,
+              children: [
+                HomeView(),
+                MostEffectView(),
+                CountryView(),
+                FAQView()
+              ],
+            ),
+          );
         });
   }
+
 }

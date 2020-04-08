@@ -1,5 +1,6 @@
 import 'package:covid19tracker/core/viewmodels/country_view_model.dart';
 import 'package:covid19tracker/ui/shared/ui_helpers.dart';
+import 'package:covid19tracker/ui/widgets/loading.dart';
 import 'package:covid19tracker/ui/widgets/summary_widget_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
@@ -25,7 +26,7 @@ class _CountryViewState extends State<CountryView>
         builder: (context, model, child) {
           return Container(
             color: !widget.call
-                ? Colors.grey.withOpacity(0.1)
+                ? Theme.of(context).backgroundColor
                 : Colors.transparent,
             child: Padding(
               padding: !widget.call
@@ -37,26 +38,18 @@ class _CountryViewState extends State<CountryView>
                       ? Container(
                           height: 60,
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Theme.of(context).primaryColor,
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: TextField(
                                 cursorColor: Colors.grey.withOpacity(0.4),
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.6),
-                                    fontFamily: "OpenSans",
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20),
+                                style: Theme.of(context).textTheme.headline4,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Search",
-                                    hintStyle: TextStyle(
-                                        color: Colors.black.withOpacity(0.6),
-                                        fontFamily: "OpenSans",
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20)),
+                                    hintStyle: Theme.of(context).textTheme.headline4,),
                                 onChanged: (val) =>
                                     model.filterSearchResults(val.trim()),
                               ),
@@ -101,21 +94,11 @@ class _CountryViewState extends State<CountryView>
                                     child: Center(
                                         child: Text(
                                       "NO Data Found",
-                                      style: TextStyle(fontSize: 30),
+                                      style: Theme.of(context).textTheme.headline5,
                                     )),
                                   ),
                                 ))
-                      : Center(
-                          child: SizedBox(
-                              height: 200,
-                              width: 200,
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                    strokeWidth: 4,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.black)),
-                              )),
-                        ),
+                      : Loading()
                 ],
               ),
             ),
