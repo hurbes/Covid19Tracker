@@ -1,5 +1,5 @@
+import 'package:covid19tracker/core/models/summary.dart';
 import 'Regional.dart';
-import 'Summary.dart';
 
 class Data {
   SummaryState summary;
