@@ -6,7 +6,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'country_view.dart';
 
-
 class MostEffectView extends StatefulWidget {
   const MostEffectView({Key key}) : super(key: key);
 
@@ -14,22 +13,24 @@ class MostEffectView extends StatefulWidget {
   _MostEffectViewState createState() => _MostEffectViewState();
 }
 
- RefreshController _refreshController = RefreshController(initialRefresh: false);
-class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAliveClientMixin<MostEffectView> {
+RefreshController _refreshController = RefreshController(initialRefresh: false);
+
+class _MostEffectViewState extends State<MostEffectView>
+    with AutomaticKeepAliveClientMixin<MostEffectView> {
   @override
   Widget build(BuildContext context) {
-       super.build(context);
+    super.build(context);
     return ViewModelProvider<MostEffectedViewModel>.withConsumer(
         viewModel: MostEffectedViewModel(),
         onModelReady: (model) => model.getWorldCases(),
         builder: (context, model, child) {
           return SmartRefresher(
-               enablePullDown: true,
-                controller: _refreshController,
-                    onRefresh: () => model
-                    .getWorldCases()
-                    .whenComplete(() => _refreshController.refreshCompleted()),
-                      child: Container(
+            enablePullDown: true,
+            controller: _refreshController,
+            onRefresh: () => model
+                .getWorldCases()
+                .whenComplete(() => _refreshController.refreshCompleted()),
+            child: Container(
               color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
@@ -53,18 +54,21 @@ class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAlive
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top : 15),
+                        padding: const EdgeInsets.only(top: 15),
                         child: Text(
                           "Most Affected Countries",
-                          style: Theme.of(context).textTheme.headline4,
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor.withOpacity(0.6),
+                              fontWeight: FontWeight.w300,
+                              fontSize: 20),
                         ),
                       ),
                     ),
-                     Expanded(
-                         child: CountryView(
-                       limit: 5,
-                       call: true,
-                     ))
+                    Expanded(
+                        child: CountryView(
+                      limit: 5,
+                      call: true,
+                    ))
                   ],
                 ),
               ),
@@ -72,13 +76,13 @@ class _MostEffectViewState extends State<MostEffectView> with AutomaticKeepAlive
           );
         });
   }
-   
- @override
+
+  @override
   void dispose() {
-   _refreshController.dispose();
+    _refreshController.dispose();
     super.dispose();
   }
+
   @override
   bool get wantKeepAlive => true;
 }
-

@@ -20,12 +20,15 @@ class StartUpPage extends StatelessWidget {
                 backgroundColor: Theme.of(context).backgroundColor,
                 elevation: 0,
                 title: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 30.0),
-                  child: Text(
-                    "Covid-19 Tracker",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ),
+                    padding: const EdgeInsets.only(left: 8.0, top: 30.0),
+                    child: Text(
+                      "Covid-19 Tracker",
+                      style: TextStyle(
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.8),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 25),
+                    )),
                 actions: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0, top: 25),
@@ -53,7 +56,7 @@ class StartUpPage extends StatelessWidget {
               ),
             ),
             bottomNavigationBar: BottomNavyBar(
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).cardColor,
               selectedIndex: model.cIndex,
               onItemSelected: (index) => model.setCIndex(index: index),
               showElevation: false,
@@ -90,5 +93,4 @@ class StartUpPage extends StatelessWidget {
           );
         });
   }
-
 }

@@ -1,4 +1,5 @@
 import 'package:covid19tracker/core/viewmodels/home_view_model.dart';
+import 'package:covid19tracker/ui/widgets/errorWidget.dart';
 import 'package:covid19tracker/ui/widgets/loading.dart';
 import 'package:covid19tracker/ui/widgets/summary_widget_item.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,11 @@ class _HomeViewState extends State<HomeView>
             child: Padding(
               padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
               child: SmartRefresher(
-                enablePullDown: true,
-                controller: _refreshController,
-                onRefresh: () => model
-                    .getIndiaDetailsData()
-                    .whenComplete(() => _refreshController.refreshCompleted()),
-                child: Column(
+                  enablePullDown: true,
+                  controller: _refreshController,
+                  onRefresh: () => model.getIndiaDetailsData().whenComplete(
+                      () => _refreshController.refreshCompleted()),
+                  child: Column(
                     children: <Widget>[
                       SummaryWidgetItem(
                           cases: summary?.total,
@@ -46,30 +46,41 @@ class _HomeViewState extends State<HomeView>
                           critcalreplacement: "Foreign",
                           critical: summary?.confirmedCasesForeign,
                           name: 'India Summary'),
-                     Padding(
-                       padding: const EdgeInsets.only(top : 25.0 , bottom: 15),
-                       child: Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: TextField(
-                                  cursorColor: Colors.grey.withOpacity(0.4),
-                                  style: Theme.of(context).textTheme.headline4,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Search",
-                                      hintStyle: Theme.of(context).textTheme.headline4,),
-                                  onChanged: (val) =>
-                                      model.filterSearchResults(val.trim()),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25.0, bottom: 15),
+                        child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: TextField(
+                                cursorColor: Colors.grey.withOpacity(0.4),
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.6),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Search",
+                                  hintStyle: TextStyle(
+                                      color: Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.6),
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 20),
                                 ),
+                                onChanged: (val) =>
+                                    model.filterSearchResults(val.trim()),
                               ),
                             ),
                           ),
-                     ),
+                        ),
+                      ),
                       !model.busy
                           ? model.indiaDetails != null
                               ? Expanded(
@@ -79,31 +90,23 @@ class _HomeViewState extends State<HomeView>
                                   itemBuilder: (BuildContext context, int i) {
                                     var data = model.indiaDetails.data.regional;
                                     return Padding(
-                                      padding: const EdgeInsets.only(bottom : 15.0),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 15.0),
                                       child: SummaryWidgetItem(
                                           cases: data[i].confirmedCasesIndian,
                                           recovered: data[i].discharged,
                                           death: data[i].deaths,
                                           critcalreplacement: "Foreign",
-                                          critical: data[i].confirmedCasesForeign,
+                                          critical:
+                                              data[i].confirmedCasesForeign,
                                           name: data[i].loc),
                                     );
                                   },
                                 ))
-                              : Center(
-                                  child: SizedBox(
-                                    height: 200,
-                                    child: Center(
-                                        child: Text(
-                                      "NO Data Found",
-                                      style: TextStyle(fontSize: 30 , color: Colors.black87 , fontFamily: "OpenSans"),
-                                    )),
-                                  ),
-                                )
+                              : ErrorText()
                           : Loading(),
                     ],
-                  )
-              ),
+                  )),
             ),
           );
         });

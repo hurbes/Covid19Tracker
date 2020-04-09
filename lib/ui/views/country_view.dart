@@ -1,5 +1,6 @@
 import 'package:covid19tracker/core/viewmodels/country_view_model.dart';
 import 'package:covid19tracker/ui/shared/ui_helpers.dart';
+import 'package:covid19tracker/ui/widgets/errorWidget.dart';
 import 'package:covid19tracker/ui/widgets/loading.dart';
 import 'package:covid19tracker/ui/widgets/summary_widget_item.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ class CountryView extends StatefulWidget {
   @override
   _CountryViewState createState() => _CountryViewState();
 }
-
 
 class _CountryViewState extends State<CountryView>
     with AutomaticKeepAliveClientMixin<CountryView> {
@@ -38,18 +38,28 @@ class _CountryViewState extends State<CountryView>
                       ? Container(
                           height: 60,
                           decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: TextField(
                                 cursorColor: Colors.grey.withOpacity(0.4),
-                                style: Theme.of(context).textTheme.headline4,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.6),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 20),
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "Search",
-                                    hintStyle: Theme.of(context).textTheme.headline4,),
+                                    hintStyle: TextStyle(
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.6),
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 20)),
                                 onChanged: (val) =>
                                     model.filterSearchResults(val.trim()),
                               ),
@@ -88,16 +98,7 @@ class _CountryViewState extends State<CountryView>
                                     },
                                   ),
                                 )
-                              : Center(
-                                  child: SizedBox(
-                                    height: 200,
-                                    child: Center(
-                                        child: Text(
-                                      "NO Data Found",
-                                      style: Theme.of(context).textTheme.headline5,
-                                    )),
-                                  ),
-                                ))
+                              : ErrorText())
                       : Loading()
                 ],
               ),
@@ -109,3 +110,4 @@ class _CountryViewState extends State<CountryView>
   @override
   bool get wantKeepAlive => true;
 }
+
