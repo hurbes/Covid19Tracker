@@ -71,34 +71,33 @@ class _CountryViewState extends State<CountryView>
                   !model.busy
                       ? Expanded(
                           child: RefreshIndicator(
-                                  onRefresh: () => model.getCountryCases(),
-                                  child:  model.country.isNotEmpty
+                          onRefresh: () => model.getCountryCases(),
+                          child: model.country.isNotEmpty
                               ? ListView.builder(
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: widget.limit != null
-                                        ? widget.limit
-                                        : model.country.length,
-                                    itemBuilder: (context, i) {
-                                      return Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 0.0, bottom: 15),
-                                        child: SummaryWidgetItem(
-                                            active: model.country[i].active,
-                                            cases: model.country[i].cases,
-                                            critical: model.country[i].critical,
-                                            death: model.country[i].deaths,
-                                            name: model.country[i].country,
-                                            recovered:
-                                                model.country[i].recovered,
-                                            flag: model
-                                                .country[i].countryInfo.flag),
-                                      );
-                                    },
-                                  ) : ErrorText(),
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: widget.limit != null
+                                      ? widget.limit
+                                      : model.country.length,
+                                  itemBuilder: (context, i) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 0.0, bottom: 15),
+                                      child: SummaryWidgetItem(
+                                          active: model.country[i].active,
+                                          cases: model.country[i].cases,
+                                          critical: model.country[i].critical,
+                                          death: model.country[i].deaths,
+                                          name: model.country[i].country,
+                                          recovered: model.country[i].recovered,
+                                          flag: model
+                                              .country[i].countryInfo.flag),
+                                    );
+                                  },
                                 )
-                             )
+                              : ErrorText(),
+                        ))
                       : Loading()
                 ],
               ),
@@ -110,4 +109,3 @@ class _CountryViewState extends State<CountryView>
   @override
   bool get wantKeepAlive => true;
 }
-
