@@ -15,11 +15,9 @@ class MostEffectView extends StatefulWidget {
 
 RefreshController _refreshController = RefreshController(initialRefresh: false);
 
-class _MostEffectViewState extends State<MostEffectView>
-    with AutomaticKeepAliveClientMixin<MostEffectView> {
+class _MostEffectViewState extends State<MostEffectView> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return ViewModelProvider<MostEffectedViewModel>.withConsumer(
         viewModel: MostEffectedViewModel(),
         onModelReady: (model) => model.getWorldCases(),
@@ -82,7 +80,4 @@ class _MostEffectViewState extends State<MostEffectView>
     _refreshController.dispose();
     super.dispose();
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

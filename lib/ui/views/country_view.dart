@@ -96,7 +96,11 @@ class _CountryViewState extends State<CountryView>
                                     );
                                   },
                                 )
-                              : ErrorText(),
+                              : ListView(
+                                  children: <Widget>[
+                                    ErrorText(),
+                                  ],
+                                ),
                         ))
                       : Loading()
                 ],

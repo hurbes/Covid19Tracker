@@ -26,7 +26,7 @@ class HomeViewModel extends BaseModel {
         description: result,
       );
     }
-    _indiaDetailsBackup = _indiaDetails.data.regional;
+    _indiaDetailsBackup = _indiaDetails?.data?.regional;
     notifyListeners();
   }
 
