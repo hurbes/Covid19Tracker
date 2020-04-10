@@ -40,6 +40,8 @@
 /build/app/outputs/mapping
 /build/app/outputs/apk/app.apk
 /build/app/outputs/apk/app.apk.sha1
+/build/app/outputs/apk/release/output.json
+key.jks
 
 
 
