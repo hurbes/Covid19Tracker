@@ -28,8 +28,25 @@
 .packages
 .pub-cache/
 .pub/
-/build/
+/build/flutter_assets
+/build/shared_preferences
+/build/shared_preferences_macos
+/build/shared_preferences_web
+/build/app/generated
+/build/app/intermediates
+/build/app/reports
+/build/app/tmp
+/build/app/outputs/logs
+/build/app/outputs/mapping
+/build/app/outputs/apk/app.apk
+/build/app/outputs/apk/app.apk.sha1
 
+
+
+
+
+#keys
+/android/key.properties
 # Web related
 lib/generated_plugin_registrant.dart
 
