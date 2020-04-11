@@ -32,6 +32,10 @@
 /build/shared_preferences
 /build/shared_preferences_macos
 /build/shared_preferences_web
+/build/url_launcher
+/build/url_launcher_macos
+/build/url_launcher_web
+/build/fluttertoast
 /build/app/generated
 /build/app/intermediates
 /build/app/reports

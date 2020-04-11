@@ -1,13 +1,13 @@
 import 'package:covid19tracker/core/models/IndiaDetails.dart';
 import 'package:covid19tracker/core/models/Regional.dart';
 import 'package:covid19tracker/core/services/api.dart';
-import 'package:covid19tracker/core/services/dialog_service.dart';
+import 'package:covid19tracker/core/services/toast_service.dart';
 import 'package:covid19tracker/core/viewmodels/base_model.dart';
 import 'package:covid19tracker/locator.dart';
 
 class HomeViewModel extends BaseModel {
   Api _api = locator<Api>();
-  DialogService _dialogService = locator<DialogService>();
+  ToastService _toastService = locator<ToastService>();
 
   IndiaDetails _indiaDetails;
   IndiaDetails get indiaDetails => _indiaDetails;
@@ -21,10 +21,7 @@ class HomeViewModel extends BaseModel {
       setBusy(false);
     } else {
       setBusy(false);
-      await _dialogService.showDialog(
-        title: "List Update Failed",
-        description: result,
-      );
+         _toastService.showToast(msg: result);
     }
     _indiaDetailsBackup = _indiaDetails?.data?.regional;
     notifyListeners();

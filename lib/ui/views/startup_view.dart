@@ -40,18 +40,7 @@ class StartUpPage extends StatelessWidget {
                         onPressed: () {
                           model.setDarkmode(context: context);
                         }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0, top: 25),
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.info_outline,
-                          color: Theme.of(context).primaryColorDark,
-                        ),
-                        onPressed: () {
-                          model.about();
-                        }),
-                  ),
+                  )
                 ],
               ),
             ),
