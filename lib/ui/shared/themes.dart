@@ -22,5 +22,6 @@ final ThemeData lightTheme = new ThemeData(
     primaryColorLight: Colors.black.withOpacity(0.9),
     primaryColorDark: Colors.white.withOpacity(0.8),
     primaryColorBrightness: Brightness.dark,
+    fontFamily: "OpenSans",
     );
 
