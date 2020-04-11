@@ -27,6 +27,9 @@ class CountryViewModel extends BaseModel {
         description: result,
       );
     }
+    _country.sort((a, b) {
+        return b.cases.compareTo(a.cases);
+      });
     _countryB = _country;
     notifyListeners();
   }
