@@ -41,18 +41,10 @@ class _MostEffectViewState extends State<MostEffectView> {
                         name: 'World Wide',
                         recovered: model.worldcases?.recovered,
                         critical: model.worldcases?.critical),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    //   child: Divider(
-                    //     height: 30,
-                    //     thickness: 1,
-                    //     color: Colors.black87,
-                    //   ),
-                    // ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.only(top: 15,left: 8),
                         child: Text(
                           "Most Affected Countries",
                           style: TextStyle(
