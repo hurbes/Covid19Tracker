@@ -10,15 +10,24 @@ class CountryViewModel extends BaseModel {
   DialogService _dialogService = locator<DialogService>();
 
   List<Country> _country = [];
+  List<Country> _countryunsorted = [];
   List<Country> get country => _country;
 
-  List<Country> _countryB = [];
+  List<Country> _countryBackup = [];
 
-  Future getCountryCases() async {
+  Future getCountryCases({sorted}) async {
     setBusy(true);
     var result = await _api.getCountryStats();
     if (result is List<Country>) {
-      _country = result;
+      if (sorted) {
+      result?.sort((a, b) {
+        return b.cases.compareTo(a.cases);
+      });
+       _country = result;
+      } else {
+         _country = result;
+      }
+   
       setBusy(false);
     } else {
       setBusy(false);
@@ -27,23 +36,20 @@ class CountryViewModel extends BaseModel {
         description: result,
       );
     }
-    _country.sort((a, b) {
-        return b.cases.compareTo(a.cases);
-      });
-    _countryB = _country;
+    _countryBackup = _country;
     notifyListeners();
   }
 
   void filterSearchResults(String query) {
     if (query.isNotEmpty) {
-      _country = _countryB
+      _country = _countryBackup
           .where((element) => element.country.toLowerCase().contains(query.toLowerCase()))
           .toList();
       notifyListeners();
       return;
     } else {
       _country.clear();
-      _country.addAll(_countryB);
+      _country.addAll(_countryBackup);
       notifyListeners();
     }
   }

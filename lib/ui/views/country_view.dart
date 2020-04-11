@@ -9,7 +9,8 @@ import 'package:provider_architecture/provider_architecture.dart';
 class CountryView extends StatefulWidget {
   final bool call;
   final int limit;
-  CountryView({Key key, this.limit, this.call = false}) : super(key: key);
+  final bool sorted;
+  CountryView({Key key, this.limit, this.call = false , this.sorted = false}) : super(key: key);
 
   @override
   _CountryViewState createState() => _CountryViewState();
@@ -22,7 +23,7 @@ class _CountryViewState extends State<CountryView>
     super.build(context);
     return ViewModelProvider<CountryViewModel>.withConsumer(
         viewModel: CountryViewModel(),
-        onModelReady: (model) => model.getCountryCases(),
+        onModelReady: (model) => model.getCountryCases(sorted: widget.sorted),
         builder: (context, model, child) {
           return Container(
             color: !widget.call

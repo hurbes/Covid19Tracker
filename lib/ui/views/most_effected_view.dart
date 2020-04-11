@@ -66,6 +66,7 @@ class _MostEffectViewState extends State<MostEffectView> {
                         child: CountryView(
                       limit: 5,
                       call: true,
+                      sorted: true,
                     ))
                   ],
                 ),
