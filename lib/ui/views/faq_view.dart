@@ -16,7 +16,7 @@ class FAQView extends StatelessWidget {
           return Container(
             color: Theme.of(context).backgroundColor,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
+              padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverList(

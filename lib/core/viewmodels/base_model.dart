@@ -10,10 +10,9 @@ class BaseModel extends ChangeNotifier {
 
   LocalStorageService _localStorageService = locator<LocalStorageService>();
   ToastService _toastService = locator<ToastService>();
-  int _cIndex = 0;
 
   bool get themedata => _localStorageService.darkmode;
-  int get cIndex => _cIndex;
+  int get cIndex => _localStorageService.cindex;
 
 
   void setDarkmode({context}){
@@ -23,7 +22,7 @@ class BaseModel extends ChangeNotifier {
   }
 
    void setCIndex({index}){
-    _cIndex = index;
+    _localStorageService.cindex = index;
     notifyListeners();
   }
 

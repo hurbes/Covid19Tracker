@@ -20,7 +20,7 @@ class StartUpPage extends StatelessWidget {
                 backgroundColor: Theme.of(context).backgroundColor,
                 elevation: 0,
                 title: Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 30.0),
+                    padding: const EdgeInsets.only(left: 0, top: 30.0),
                     child: Text(
                       "Covid-19 Tracker",
                       style: TextStyle(

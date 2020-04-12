@@ -4,6 +4,7 @@ class LocalStorageService {
   static LocalStorageService _instance;
   static SharedPreferences _preferences;
   static const String DarkMode = "darkmode";
+  static const String CurrentPage = "index";
 
 
 
@@ -30,6 +31,17 @@ bool get darkmode {
   }
 }
 set darkmode(bool val) => _saveToDisk(DarkMode , val);
+
+
+int get cindex {
+  var res = _getFromDisk(CurrentPage);
+  if (res == null) {
+    return 0;
+  } else {
+    return res;
+  }
+}
+set cindex(int val) => _saveToDisk(CurrentPage , val);
 
 
   dynamic _getFromDisk(String key) {
