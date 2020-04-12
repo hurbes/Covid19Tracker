@@ -6,36 +6,28 @@ import 'package:covid19tracker/ui/widgets/summary_widget_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
-class CountryView extends StatefulWidget {
+class CountryView extends StatelessWidget {
   final bool call;
   final int limit;
   final bool sorted;
   CountryView({Key key, this.limit, this.call = false , this.sorted = false}) : super(key: key);
 
-  @override
-  _CountryViewState createState() => _CountryViewState();
-}
-
-class _CountryViewState extends State<CountryView>
-    with AutomaticKeepAliveClientMixin<CountryView> {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return ViewModelProvider<CountryViewModel>.withConsumer(
         viewModel: CountryViewModel(),
-        onModelReady: (model) => model.getCountryCases(sorted: widget.sorted),
+        onModelReady: (model) => model.getCountryCases(sorted: sorted),
         builder: (context, model, child) {
           return Container(
-            color: !widget.call
+            color: !call
                 ? Theme.of(context).backgroundColor
                 : Colors.transparent,
             child: Padding(
-              padding: !widget.call
+              padding: !call
                   ? const EdgeInsets.fromLTRB(15, 15, 15, 5)
                   : const EdgeInsets.all(0),
               child: Column(
                 children: <Widget>[
-                  !widget.call
+                  !call
                       ? Container(
                           height: 60,
                           decoration: BoxDecoration(
@@ -72,14 +64,14 @@ class _CountryViewState extends State<CountryView>
                   !model.busy
                       ? Expanded(
                           child: RefreshIndicator(
-                          onRefresh: () => model.getCountryCases(),
+                          onRefresh: () => model.getCountryCases(sorted: sorted),
                           child: model.country.isNotEmpty
                               ? ListView.builder(
                                   physics:
                                       const AlwaysScrollableScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: widget.limit != null
-                                      ? widget.limit
+                                  itemCount: limit != null
+                                      ? limit
                                       : model.country.length,
                                   itemBuilder: (context, i) {
                                     return Padding(
@@ -110,7 +102,4 @@ class _CountryViewState extends State<CountryView>
           );
         });
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

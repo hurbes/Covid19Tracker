@@ -22,7 +22,7 @@ class Api {
          return "Can't fetch state data";
       }
     } on SocketException {
-      return "Failed to connect DataBase";
+      return "Failed to connect Database";
     }
   }
 
@@ -34,10 +34,10 @@ class Api {
          var worldcases = WorldCases.fromJson(json.decode(response.body));
         return worldcases;
       } else {
-         return "Can't fetch state data";
+         return "Can't fetch World Stats data";
       }
     } on SocketException {
-      return "Failed to connect DataBase";
+      return "Failed to connect Database";
     }
   }  
 
@@ -52,10 +52,10 @@ class Api {
             .toList();
         return countryStats;
       } else {
-         return "Can't fetch state data";
+         return "Can't fetch Country Stats";
       }
     } on SocketException {
-      return "Failed to connect DataBase";
+      return "Failed to connect Database";
     }
   }
 }
