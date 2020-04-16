@@ -28,6 +28,7 @@
 .packages
 .pub-cache/
 .pub/
+/build/firebase_remote_config/
 /build/flutter_assets
 /build/shared_preferences
 /build/shared_preferences_macos
@@ -45,6 +46,7 @@
 /build/app/outputs/apk/app.apk
 /build/app/outputs/apk/app.apk.sha1
 /build/app/outputs/apk/release/output.json
+google-services.json
 key.jks
 
 

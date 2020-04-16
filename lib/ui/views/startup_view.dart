@@ -1,8 +1,9 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:covid19tracker/core/viewmodels/base_model.dart';
+import 'package:covid19tracker/core/viewmodels/start_up_model.dart';
 import 'package:covid19tracker/ui/views/country_view.dart';
 import 'package:covid19tracker/ui/views/faq_view.dart';
 import 'package:covid19tracker/ui/views/most_effected_view.dart';
+import 'package:covid19tracker/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'home_view.dart';
@@ -10,10 +11,13 @@ import 'home_view.dart';
 class StartUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<BaseModel>.withConsumer(
-        viewModel: BaseModel(),
+    return ViewModelProvider<StartUpModel>.withConsumer(
+        viewModel: StartUpModel(),
+        onModelReady: (model) => model.handleStartUpLogic(),
         builder: (context, model, child) {
-          return Scaffold(
+         if (!model.busy) {
+           if (model.showMainBanner) {
+             return Scaffold(
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(70.0),
               child: AppBar(
@@ -22,7 +26,7 @@ class StartUpPage extends StatelessWidget {
                 title: Padding(
                     padding: const EdgeInsets.only(left: 0, top: 30.0),
                     child: Text(
-                      "Covid-19 Tracker",
+                      "Covid 19 Tracker",
                       style: TextStyle(
                           color:
                               Theme.of(context).primaryColor.withOpacity(0.8),
@@ -80,6 +84,24 @@ class StartUpPage extends StatelessWidget {
               ],
             ),
           );
+           } else {
+             return Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: Text('Can not communicate with Servers\n\n1. Check you Internet Connection\n\n2. Try Clearing AppData\n\n3. Developer may have shutted down the application', style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black
+                ),),
+              ),
+            ),
+          );
+           }
+         } else {
+           return Scaffold(body: Loading() ,  backgroundColor: Theme.of(context).backgroundColor,);
+         }
         });
   }
 }

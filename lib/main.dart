@@ -7,13 +7,14 @@ import 'ui/shared/scrollConfig.dart';
 import 'ui/views/startup_view.dart';
 
 
+
 Future<void> main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     await setupLocator();
     runApp(Phoenix(child: MyApp()));
   } catch(error) {
-    print('Locator setup has failed');
+    print(error.toString());
   }
 }
 class MyApp extends StatelessWidget {

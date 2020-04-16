@@ -1,5 +1,5 @@
 import 'package:covid19tracker/core/models/StaticData.dart';
-import 'package:covid19tracker/core/viewmodels/home_view_model.dart';
+import 'package:covid19tracker/core/viewmodels/start_up_model.dart';
 import 'package:covid19tracker/ui/shared/ui_helpers.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +10,8 @@ class FAQView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<HomeViewModel>.withConsumer(
-        viewModel: HomeViewModel(),
+    return ViewModelProvider<StartUpModel>.withConsumer(
+        viewModel: StartUpModel(),
         builder: (context, model, child) {
           return Container(
             color: Theme.of(context).backgroundColor,

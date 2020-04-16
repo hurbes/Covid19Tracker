@@ -17,6 +17,9 @@ https://github.com/hurbes/Covid19Tracker/blob/master/build/app/outputs/apk/relea
 3. Top Five effected Country View
 4. Open Source
 
+#PS: Add your own google-services.json in android/app/ for remote to work and you also need to set you own remote config with a bool "enable_app" key
+
+
 #Api used
 
 https://corona.lmao.ninja
