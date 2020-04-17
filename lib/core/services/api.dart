@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class Api {
   static const String _indiaStats = 'https://api.rootnet.in/covid19-in/stats/latest';
-  static const String _worldStats = 'https://corona.lmao.ninja';
+  static const String _worldStats = 'https://corona.lmao.ninja/v2';
 
   Future<dynamic> getStateData() async {
     try {

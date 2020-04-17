@@ -59,6 +59,12 @@ class StaticData{
       "Are antibiotics effective in preventing or treating the COVID-19?",
       "answer":
       "No. Antibiotics do not work against viruses, they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19. They should only be used as directed by a physician to treat a bacterial infection. "
+    },
+    {
+      "question":
+      "About this app",
+      "answer":
+      "This Application was made made only for personal usage. The data might me accurate or might not be I did know cause again its just a fun project I did for killing some time.\nThe World Stats are fetched from \"corona.lmao.ninja\"\nIndia Stats are fetched from \"api.rootnet.in/covid19-in/stats/latest\".\nI don't take any responsibility for fake or inaccurate data.\nDo your own research for accurate data and stats"
     }
   ];
 
