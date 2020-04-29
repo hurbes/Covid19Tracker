@@ -24,7 +24,7 @@ https://github.com/hurbes/Covid19Tracker/blob/master/build/app/outputs/apk/relea
 
 https://corona.lmao.ninja
 
-https://api.rootnet.in/covid19-in/
+https://api.rootnet.in/
 
 #Used FilledStacks Dependency Injection method
 
